@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="et">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DJ Kristjan Orula</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold: #C9A84C;
+  --gold-light: #E8C97A;
+  --gold-dim: rgba(201,168,76,0.15);
+  --black: #0A0A0A;
+  --near-black: #111111;
+  --dark: #1A1A1A;
+  --mid: #2A2A2A;
+  --light-text: rgba(255,255,255,0.75);
+  --muted: rgba(255,255,255,0.4);
+  --serif: 'Cormorant Garamond', Georgia, serif;
+  --sans: 'Montserrat', sans-serif;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--black);
+  color: #fff;
+  font-family: var(--sans);
+  font-weight: 300;
+  overflow-x: hidden;
+}
+
+/* LANG TOGGLE */
+.lang-toggle {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+  z-index: 1000;
+  display: flex;
+  gap: 0;
+  border: 1px solid rgba(201,168,76,0.4);
+}
+.lang-btn {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  font-family: var(--sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.lang-btn.active {
+  background: var(--gold);
+  color: var(--black);
+}
+.lang-btn:hover:not(.active) { color: var(--gold); }
+
+/* NAV */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 999;
+  padding: 20px 48px;
+  display: flex;
+  align-items: center;
+  background: linear-gradient(to bottom, rgba(10,10,10,0.9) 0%, transparent 100%);
+  transition: background 0.3s;
+}
+nav.scrolled { background: rgba(10,10,10,0.97); border-bottom: 1px solid rgba(201,168,76,0.15); }
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  text-decoration: none;
+}
+.nav-logo img { height: 44px; opacity: 0.9; filter: brightness(1.1); }
+.nav-logo-text {
+  font-family: var(--serif);
+  font-size: 14px;
+  letter-spacing: 3px;
+  color: rgba(255,255,255,0.8);
+  text-transform: uppercase;
+}
+
+.nav-links {
+  margin-left: auto;
+  display: flex;
+  gap: 36px;
+  list-style: none;
+  margin-right: 100px;
+}
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 10px;
+  letter-spacing: 2.5px;
+  text-transform: uppercase;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+
+/* HERO */
+#hero {
+  position: relative;
+  height: 100vh;
+  min-height: 600px;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-end;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url('Artboard_1.jpg');
+  background-size: cover;
+  background-position: center 20%;
+  filter: brightness(0.45) contrast(1.1);
+  transform: scale(1.05);
+  animation: heroZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes heroZoom {
+  from { transform: scale(1.05); }
+  to { transform: scale(1.12); }
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(10,10,10,1) 0%, rgba(10,10,10,0.3) 50%, transparent 100%);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  padding: 0 10vw 10vh;
+  width: 100%;
+}
+
+.hero-tag {
+  display: inline-block;
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  border-top: 1px solid var(--gold);
+  padding-top: 8px;
+  margin-bottom: 20px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.3s forwards;
+}
+
+.hero-name {
+  font-family: var(--serif);
+  font-size: clamp(52px, 9vw, 110px);
+  font-weight: 300;
+  line-height: 0.9;
+  letter-spacing: -1px;
+  opacity: 0;
+  animation: fadeUp 1s ease 0.6s forwards;
+}
+
+.hero-name em {
+  font-style: italic;
+  color: var(--gold-light);
+}
+
+.hero-sub {
+  margin-top: 24px;
+  font-size: 12px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--light-text);
+  opacity: 0;
+  animation: fadeUp 1s ease 0.9s forwards;
+}
+
+.hero-scroll {
+  position: absolute;
+  bottom: 40px;
+  right: 48px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  animation: fadeUp 1s ease 1.5s forwards;
+}
+.hero-scroll span {
+  font-size: 9px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  writing-mode: vertical-rl;
+}
+.scroll-line {
+  width: 1px;
+  height: 60px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+@keyframes scrollPulse {
+  0%, 100% { opacity: 0.4; transform: scaleY(1); }
+  50% { opacity: 1; transform: scaleY(1.1); }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* SECTIONS */
+section {
+  padding: 100px 10vw;
+}
+
+.section-label {
+  font-size: 10px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.section-label::after {
+  content: '';
+  flex: 0 0 40px;
+  height: 1px;
+  background: var(--gold);
+}
+
+.section-title {
+  font-family: var(--serif);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 300;
+  line-height: 1.1;
+  margin-bottom: 40px;
+}
+
+.section-title em { font-style: italic; color: var(--gold-light); }
+
+/* ABOUT */
+#about {
+  background: var(--near-black);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.about-text p {
+  font-size: 15px;
+  line-height: 1.9;
+  color: var(--light-text);
+  margin-bottom: 20px;
+}
+
+.about-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+}
+
+.stat-card {
+  background: var(--mid);
+  padding: 32px 28px;
+  border-left: 3px solid var(--gold);
+  transition: background 0.3s;
+}
+.stat-card:hover { background: var(--dark); }
+
+.stat-number {
+  font-family: var(--serif);
+  font-size: 52px;
+  font-weight: 300;
+  color: var(--gold);
+  line-height: 1;
+}
+.stat-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 6px;
+}
+
+/* GENRES */
+#genres {
+  background: var(--black);
+}
+
+.genres-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 2px;
+  margin-top: 48px;
+}
+
+.genre-item {
+  background: var(--near-black);
+  padding: 28px 24px;
+  border-bottom: 2px solid transparent;
+  transition: all 0.3s;
+  cursor: default;
+}
+.genre-item:hover {
+  background: var(--dark);
+  border-bottom-color: var(--gold);
+}
+.genre-item:hover .genre-name { color: var(--gold); }
+
+.genre-name {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  transition: color 0.3s;
+  margin-bottom: 4px;
+}
+.genre-desc {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+/* EVENTS */
+#events {
+  background: var(--near-black);
+}
+
+.events-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2px;
+  margin-top: 48px;
+}
+
+.event-item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 28px 32px;
+  background: var(--dark);
+  transition: background 0.3s;
+}
+.event-item:hover { background: var(--mid); }
+
+.event-icon {
+  font-size: 28px;
+  flex-shrink: 0;
+  opacity: 0.7;
+}
+.event-name {
+  font-family: var(--serif);
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 4px;
+}
+.event-desc {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--muted);
+}
+
+/* WHY ME */
+#why {
+  background: var(--black);
+}
+
+.why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  margin-top: 48px;
+}
+
+.why-item {
+  padding: 40px 32px;
+  background: var(--near-black);
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s;
+}
+.why-item::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: var(--gold);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.4s;
+}
+.why-item:hover::before { transform: scaleX(1); }
+.why-item:hover { background: var(--dark); }
+
+.why-number {
+  font-family: var(--serif);
+  font-size: 64px;
+  font-weight: 300;
+  color: var(--gold-dim);
+  line-height: 1;
+  margin-bottom: 8px;
+  transition: color 0.3s;
+}
+.why-item:hover .why-number { color: rgba(201,168,76,0.3); }
+
+.why-title {
+  font-family: var(--serif);
+  font-size: 22px;
+  font-weight: 400;
+  margin-bottom: 12px;
+}
+.why-text {
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--light-text);
+}
+
+/* GALLERY */
+#gallery {
+  background: var(--near-black);
+}
+
+.gallery-intro {
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+  margin-bottom: 40px;
+  font-style: italic;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 4px;
+  min-height: 200px;
+}
+
+.gallery-slot {
+  background: var(--dark);
+  border: 1px dashed rgba(201,168,76,0.2);
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: border-color 0.3s;
+}
+.gallery-slot:hover { border-color: rgba(201,168,76,0.5); }
+.gallery-slot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  inset: 0;
+  display: none;
+}
+.gallery-slot .slot-placeholder {
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-align: center;
+}
+.gallery-slot .slot-icon {
+  font-size: 28px;
+  opacity: 0.3;
+}
+
+/* CONTACT */
+#contact {
+  background: var(--black);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: start;
+}
+
+.contact-info { }
+
+.contact-detail {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 20px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  text-decoration: none;
+  color: inherit;
+  transition: all 0.3s;
+}
+.contact-detail:hover .contact-value { color: var(--gold); }
+
+.contact-icon {
+  width: 44px;
+  height: 44px;
+  border: 1px solid rgba(201,168,76,0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  flex-shrink: 0;
+  transition: all 0.3s;
+}
+.contact-detail:hover .contact-icon {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+}
+.contact-label {
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 4px;
+}
+.contact-value {
+  font-family: var(--serif);
+  font-size: 18px;
+  transition: color 0.3s;
+}
+
+.social-links {
+  display: flex;
+  gap: 12px;
+  margin-top: 40px;
+}
+.social-btn {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 20px;
+  border: 1px solid rgba(201,168,76,0.3);
+  color: var(--light-text);
+  text-decoration: none;
+  font-size: 11px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  transition: all 0.3s;
+}
+.social-btn:hover {
+  background: var(--gold-dim);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* FEEDBACK FORM */
+.feedback-form { }
+
+.feedback-form h3 {
+  font-family: var(--serif);
+  font-size: 32px;
+  font-weight: 300;
+  margin-bottom: 8px;
+}
+.feedback-form .form-sub {
+  font-size: 12px;
+  letter-spacing: 1px;
+  color: var(--muted);
+  margin-bottom: 32px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+.form-group label {
+  display: block;
+  font-size: 10px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+.form-group input,
+.form-group textarea,
+.form-group select {
+  width: 100%;
+  background: var(--near-black);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 0;
+  color: #fff;
+  font-family: var(--sans);
+  font-size: 13px;
+  font-weight: 300;
+  padding: 14px 16px;
+  outline: none;
+  transition: border-color 0.3s;
+  -webkit-appearance: none;
+}
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+  border-color: var(--gold);
+  background: var(--dark);
+}
+.form-group select option { background: var(--dark); }
+.form-group textarea { resize: vertical; min-height: 120px; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.btn-gold {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: transparent;
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 16px 36px;
+  cursor: pointer;
+  transition: all 0.3s;
+  width: 100%;
+  justify-content: center;
+  margin-top: 8px;
+}
+.btn-gold:hover {
+  background: var(--gold);
+  color: var(--black);
+}
+.btn-gold svg { transition: transform 0.3s; }
+.btn-gold:hover svg { transform: translateX(4px); }
+
+/* FOOTER */
+footer {
+  background: var(--near-black);
+  border-top: 1px solid rgba(201,168,76,0.15);
+  padding: 48px 10vw;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo img { height: 40px; opacity: 0.6; filter: brightness(1.1); }
+
+.footer-copy {
+  font-size: 11px;
+  letter-spacing: 1px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.footer-tagline {
+  font-family: var(--serif);
+  font-size: 13px;
+  font-style: italic;
+  color: rgba(201,168,76,0.5);
+  text-align: right;
+}
+
+/* DIVIDER */
+.gold-divider {
+  width: 60px;
+  height: 1px;
+  background: var(--gold);
+  margin: 0 auto 60px;
+}
+
+/* SCROLL REVEAL */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  section { padding: 70px 6vw; }
+  #about, #contact { grid-template-columns: 1fr; gap: 48px; }
+  .events-list { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; }
+  .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+  .form-row { grid-template-columns: 1fr; }
+  .hero-content { padding: 0 6vw 12vh; }
+  footer { flex-direction: column; gap: 20px; text-align: center; }
+  .footer-tagline { text-align: center; }
+  .lang-toggle { top: 16px; right: 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- LANG TOGGLE -->
+<div class="lang-toggle">
+  <button class="lang-btn active" onclick="setLang('et')" id="btn-et">ET</button>
+  <button class="lang-btn" onclick="setLang('en')" id="btn-en">EN</button>
+</div>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="#hero" class="nav-logo">
+    <img src="136746055.png" alt="DJ Kristjan Orula logo">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#about" data-et="Minust" data-en="About">Minust</a></li>
+    <li><a href="#genres" data-et="Muusika" data-en="Music">Muusika</a></li>
+    <li><a href="#events" data-et="Üritused" data-en="Events">Üritused</a></li>
+    <li><a href="#gallery" data-et="Galerii" data-en="Gallery">Galerii</a></li>
+    <li><a href="#contact" data-et="Kontakt" data-en="Contact">Kontakt</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="hero-tag" data-et="DJ · Eesti" data-en="DJ · Estonia">DJ · Eesti</div>
+    <h1 class="hero-name">Kristjan<br><em>Orula</em></h1>
+    <p class="hero-sub" data-et="Muusika, mis kõnetab · Õhkkond, mis jääb meelde" data-en="Music that speaks · Atmosphere that stays">Muusika, mis kõnetab · Õhkkond, mis jääb meelde</p>
+  </div>
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    <span data-et="Keri alla" data-en="Scroll">Keri alla</span>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-text reveal">
+    <div class="section-label" data-et="Minust" data-en="About me">Minust</div>
+    <h2 class="section-title" data-et="Kirg muusika<br>vastu <em>üle 20 aasta</em>" data-en="A passion for music<br><em>over 20 years</em>">Kirg muusika<br>vastu <em>üle 20 aasta</em></h2>
+    <p data-et="Olen Kristjan Orula — DJ, kelle jaoks muusika pole lihtsalt töö, vaid elulaad. Olen kogu selle aja esinemas käinud peamiselt hobina ja armastusest muusika vastu, hoides endas tõelise kirge iga esinemise vastu." data-en="I'm Kristjan Orula — a DJ for whom music isn't just a job, but a way of life. Throughout the years I've been performing primarily out of passion and love for music, bringing genuine dedication to every event.">Olen Kristjan Orula — DJ, kelle jaoks muusika pole lihtsalt töö, vaid elulaad. Olen kogu selle aja esinemas käinud peamiselt hobina ja armastusest muusika vastu, hoides endas tõelise kirge iga esinemise vastu.</p>
+    <p data-et="Minu repertuaar ulatub seinast seina — hardstyle'ist ja drum & bassist deep house'ini ja afrohouseni, eesti muusikast ja 80ndate ning 90ndate klassikast tänapäevase popini. Iga üritus saab täpselt sellise muusikalise atmosfääri, mida see vajab." data-en="My repertoire spans the full spectrum — from hardstyle and drum & bass to deep house and afro house, from Estonian music and 80s/90s classics to contemporary pop. Every event gets exactly the musical atmosphere it deserves.">Minu repertuaar ulatub seinast seina — hardstyle'ist ja drum & bassist deep house'ini ja afrohouseni, eesti muusikast ja 80ndate ning 90ndate klassikast tänapäevase popini. Iga üritus saab täpselt sellise muusikalise atmosfääri, mida see vajab.</p>
+  </div>
+  <div class="about-stats reveal">
+    <div class="stat-card">
+      <div class="stat-number">20+</div>
+      <div class="stat-label" data-et="Aastat kogemust" data-en="Years of experience">Aastat kogemust</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">8+</div>
+      <div class="stat-label" data-et="Muusikažanrit" data-en="Music genres">Muusikažanrit</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">20–50</div>
+      <div class="stat-label" data-et="Ideaalne publiku suurus" data-en="Ideal audience size">Ideaalne publiku suurus</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">∞</div>
+      <div class="stat-label" data-et="Kirge iga esinemise vastu" data-en="Passion for every show">Kirge iga esinemise vastu</div>
+    </div>
+  </div>
+</section>
+
+<!-- GENRES -->
+<section id="genres">
+  <div class="reveal">
+    <div class="section-label" data-et="Muusika" data-en="Music">Muusika</div>
+    <h2 class="section-title" data-et="Seinast <em>seina</em>" data-en="Every genre,<br><em>every mood</em>">Seinast <em>seina</em></h2>
+  </div>
+  <div class="genres-grid reveal">
+    <div class="genre-item">
+      <div class="genre-name">Hardstyle</div>
+      <div class="genre-desc" data-et="Energiline · Intensiivne" data-en="Energetic · Intense">Energiline · Intensiivne</div>
+    </div>
+    <div class="genre-item">
+      <div class="genre-name">Drum & Bass</div>
+      <div class="genre-desc" data-et="Kiire · Rütmiline" data-en="Fast · Rhythmic">Kiire · Rütmiline</div>
+    </div>
+    <div class="genre-item">
+      <div class="genre-name">House</div>
+      <div class="genre-desc" data-et="Klassikaalne · Tantsitav" data-en="Classic · Dancefloor">Klassikaalne · Tantsitav</div>
+    </div>
+    <div class="genre-item">
+      <div class="genre-name">Deep House</div>
+      <div class="genre-desc" data-et="Sügav · Atmosfääriline" data-en="Deep · Atmospheric">Sügav · Atmosfääriline</div>
+    </div>
+    <div class="genre-item">
+      <div class="genre-name">Afro House</div>
+      <div class="genre-desc" data-et="Rütmikas · Eksootilne" data-en="Rhythmic · Exotic">Rütmikas · Eksootilne</div>
+    </div>
+    <div class="genre-item">
+      <div class="genre-name">Pop & Dance</div>
+      <div class="genre-desc" data-et="Kõigile tuttav · Lõbus" data-en="Familiar · Fun">Kõigile tuttav · Lõbus</div>
+    </div>
+    <div class="genre-item">
+      <div class="genre-name" data-et="Eesti muusika" data-en="Estonian Music">Eesti muusika</div>
+      <div class="genre-desc" data-et="Kohalik · Südamlik" data-en="Local · Heartfelt">Kohalik · Südamlik</div>
+    </div>
+    <div class="genre-item">
+      <div class="genre-name">80s / 90s</div>
+      <div class="genre-desc" data-et="Nostalgiat täis · Ajatu" data-en="Nostalgic · Timeless">Nostalgiat täis · Ajatu</div>
+    </div>
+  </div>
+</section>
+
+<!-- EVENTS -->
+<section id="events">
+  <div class="reveal">
+    <div class="section-label" data-et="Üritused" data-en="Events">Üritused</div>
+    <h2 class="section-title" data-et="Õige muusika<br>igale <em>üritusele</em>" data-en="The right music<br>for every <em>occasion</em>">Õige muusika<br>igale <em>üritusele</em></h2>
+  </div>
+  <div class="events-list reveal">
+    <div class="event-item">
+      <div class="event-icon">🥂</div>
+      <div>
+        <div class="event-name" data-et="Juubelid & Sünnipäevad" data-en="Anniversaries & Birthdays">Juubelid & Sünnipäevad</div>
+        <div class="event-desc" data-et="Isiklik repertuaar · Külaliste soovid" data-en="Personal repertoire · Guest requests">Isiklik repertuaar · Külaliste soovid</div>
+      </div>
+    </div>
+    <div class="event-item">
+      <div class="event-icon">🏢</div>
+      <div>
+        <div class="event-name" data-et="Firma üritused" data-en="Corporate Events">Firma üritused</div>
+        <div class="event-desc" data-et="Professionaalne · Meeldejääv" data-en="Professional · Memorable">Professionaalne · Meeldejääv</div>
+      </div>
+    </div>
+    <div class="event-item">
+      <div class="event-icon">🏆</div>
+      <div>
+        <div class="event-name" data-et="Spordiüritused" data-en="Sports Events">Spordiüritused</div>
+        <div class="event-desc" data-et="Energiline · Motiveeriv" data-en="Energetic · Motivating">Energiline · Motiveeriv</div>
+      </div>
+    </div>
+    <div class="event-item">
+      <div class="event-icon">🎊</div>
+      <div>
+        <div class="event-name" data-et="Tänuüritused & Eraüritused" data-en="Appreciation & Private Events">Tänuüritused & Eraüritused</div>
+        <div class="event-desc" data-et="Intiimsem atmosfäär · Soe õhkkond" data-en="Intimate atmosphere · Warm ambience">Intiimsem atmosfäär · Soe õhkkond</div>
+      </div>
+    </div>
+    <div class="event-item">
+      <div class="event-icon">🎵</div>
+      <div>
+        <div class="event-name" data-et="Klubid & Baarid" data-en="Clubs & Bars">Klubid & Baarid</div>
+        <div class="event-desc" data-et="Eri žanrid · Publiku järgi" data-en="Various genres · Crowd-driven">Eri žanrid · Publiku järgi</div>
+      </div>
+    </div>
+    <div class="event-item">
+      <div class="event-icon">💰</div>
+      <div>
+        <div class="event-name" data-et="Hind kokkuleppel" data-en="Pricing by agreement">Hind kokkuleppel</div>
+        <div class="event-desc" data-et="Päringutel vastan kiiresti" data-en="I respond to enquiries quickly">Päringutel vastan kiiresti</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY ME -->
+<section id="why">
+  <div class="reveal">
+    <div class="section-label" data-et="Miks mina" data-en="Why me">Miks mina</div>
+    <h2 class="section-title" data-et="Mida saan<br>sulle <em>pakkuda</em>" data-en="What I can<br>offer <em>you</em>">Mida saan<br>sulle <em>pakkuda</em></h2>
+  </div>
+  <div class="why-grid reveal">
+    <div class="why-item">
+      <div class="why-number">01</div>
+      <div class="why-title" data-et="Paindlik repertuaar" data-en="Flexible repertoire">Paindlik repertuaar</div>
+      <div class="why-text" data-et="Kohandun iga ürituse ja publiku vajadustega. Hardstyle'ist 80ndate nostalgiaks — otsustad sina." data-en="I adapt to every event and audience. From hardstyle to 80s nostalgia — you decide.">Kohandun iga ürituse ja publiku vajadustega. Hardstyle'ist 80ndate nostalgiaks — otsustad sina.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-number">02</div>
+      <div class="why-title" data-et="Tõeline kirg" data-en="Genuine passion">Tõeline kirg</div>
+      <div class="why-text" data-et="Esinemisel on mulle tähendus — see pole pelgalt töö. 20+ aasta jooksul pole kirg muusika vastu kunagi kuhtunud." data-en="Every performance means something to me — it's never just a job. 20+ years and the passion has never faded.">Esinemisel on mulle tähendus — see pole pelgalt töö. 20+ aasta jooksul pole kirg muusika vastu kunagi kuhtunud.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-number">03</div>
+      <div class="why-title" data-et="Väiksem on parem" data-en="Smaller is better">Väiksem on parem</div>
+      <div class="why-text" data-et="Pean ennast kõige tugevamaks 20–50 inimesega üritustel — seal saab luua päriselt isikliku ja meeldejääva atmosfääri." data-en="I'm at my strongest with 20–50 person events — that's where you can create a truly personal and unforgettable atmosphere.">Pean ennast kõige tugevamaks 20–50 inimesega üritustel — seal saab luua päriselt isikliku ja meeldejääva atmosfääri.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-number">04</div>
+      <div class="why-title" data-et="Usaldusväärne" data-en="Reliable">Usaldusväärne</div>
+      <div class="why-text" data-et="Olen korrektne, sõbralik ja pean oma lubadustest kinni. Sinu üritusel saad olla kindel, et muusika pool on kaetud." data-en="I'm punctual, friendly and keep my promises. At your event, you can rest assured the music side is covered.">Olen korrektne, sõbralik ja pean oma lubadustest kinni. Sinu üritusel saad olla kindel, et muusika pool on kaetud.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-number">05</div>
+      <div class="why-title" data-et="Laias sortimendis varustus" data-en="Full PA setup">Laias sortimendis varustus</div>
+      <div class="why-text" data-et="Professionaalne PA süsteem, mikserid ja muusikaline varustus — saad pakkumist küsida koos või ilma varustuseta." data-en="Professional PA system, mixers and musical equipment — ask for a quote with or without gear.">Professionaalne PA süsteem, mikserid ja muusikaline varustus — saad pakkumist küsida koos või ilma varustuseta.</div>
+    </div>
+    <div class="why-item">
+      <div class="why-number">06</div>
+      <div class="why-title" data-et="Sinu soovid esikohal" data-en="Your wishes first">Sinu soovid esikohal</div>
+      <div class="why-text" data-et="Räägime enne üritust läbi, milline atmosfäär sobib. Külaliste laulude soovid on teretulnud ja arvestatavad." data-en="We discuss the desired atmosphere beforehand. Guest song requests are welcome and taken seriously.">Räägime enne üritust läbi, milline atmosfäär sobib. Külaliste laulude soovid on teretulnud ja arvestatavad.</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section id="gallery">
+  <div class="reveal">
+    <div class="section-label" data-et="Galerii" data-en="Gallery">Galerii</div>
+    <h2 class="section-title" data-et="<em>Hetked</em>" data-en="<em>Moments</em>"><em>Hetked</em></h2>
+    <p class="gallery-intro" data-et="Fotod lisanduvad peagi." data-en="Photos coming soon.">Fotod lisanduvad peagi.</p>
+  </div>
+  <div class="gallery-grid reveal">
+    <div class="gallery-slot" id="slot-1">
+      <div class="slot-icon">📷</div>
+      <div class="slot-placeholder" data-et="Lisa foto" data-en="Add photo">Lisa foto</div>
+    </div>
+    <div class="gallery-slot" id="slot-2">
+      <div class="slot-icon">📷</div>
+      <div class="slot-placeholder" data-et="Lisa foto" data-en="Add photo">Lisa foto</div>
+    </div>
+    <div class="gallery-slot" id="slot-3">
+      <div class="slot-icon">📷</div>
+      <div class="slot-placeholder" data-et="Lisa foto" data-en="Add photo">Lisa foto</div>
+    </div>
+    <div class="gallery-slot" id="slot-4">
+      <div class="slot-icon">📷</div>
+      <div class="slot-placeholder" data-et="Lisa foto" data-en="Add photo">Lisa foto</div>
+    </div>
+    <div class="gallery-slot" id="slot-5">
+      <div class="slot-icon">📷</div>
+      <div class="slot-placeholder" data-et="Lisa foto" data-en="Add photo">Lisa foto</div>
+    </div>
+    <div class="gallery-slot" id="slot-6">
+      <div class="slot-icon">📷</div>
+      <div class="slot-placeholder" data-et="Lisa foto" data-en="Add photo">Lisa foto</div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="contact-info reveal">
+    <div class="section-label" data-et="Kontakt" data-en="Contact">Kontakt</div>
+    <h2 class="section-title" data-et="Võtame<br><em>ühendust</em>" data-en="Let's get in<br><em>touch</em>">Võtame<br><em>ühendust</em></h2>
+
+    <a href="tel:+37253662231" class="contact-detail">
+      <div class="contact-icon">📞</div>
+      <div>
+        <div class="contact-label" data-et="Telefon" data-en="Phone">Telefon</div>
+        <div class="contact-value">+372 536 62231</div>
+      </div>
+    </a>
+
+    <a href="mailto:orulakristjan@gmail.com" class="contact-detail">
+      <div class="contact-icon">✉</div>
+      <div>
+        <div class="contact-label">E-mail</div>
+        <div class="contact-value">orulakristjan@gmail.com</div>
+      </div>
+    </a>
+
+    <div class="social-links">
+      <a href="https://www.facebook.com/Dj-Kristjan-Orula" target="_blank" class="social-btn">
+        <span>Facebook</span>
+      </a>
+      <a href="https://www.instagram.com/dj.kristjan.orula" target="_blank" class="social-btn">
+        <span>Instagram</span>
+      </a>
+    </div>
+  </div>
+
+  <div class="feedback-form reveal">
+    <h3 data-et="Saada päring" data-en="Send enquiry">Saada päring</h3>
+    <p class="form-sub" data-et="Täida vorm — vastan esimesel võimalusel" data-en="Fill the form — I'll reply as soon as possible">Täida vorm — vastan esimesel võimalusel</p>
+
+    <div id="contact-form">
+      <div class="form-row">
+        <div class="form-group">
+          <label data-et="Sinu nimi" data-en="Your name">Sinu nimi</label>
+          <input type="text" id="f-name" placeholder="Kristjan Tamm">
+        </div>
+        <div class="form-group">
+          <label data-et="Telefon / E-mail" data-en="Phone / Email">Telefon / E-mail</label>
+          <input type="text" id="f-contact" placeholder="+372 5xx xxxxx">
+        </div>
+      </div>
+      <div class="form-group">
+        <label data-et="Ürituse tüüp" data-en="Event type">Ürituse tüüp</label>
+        <select id="f-type">
+          <option value="" data-et="Vali ürituse tüüp..." data-en="Select event type...">Vali ürituse tüüp...</option>
+          <option data-et="Juubel / Sünnipäev" data-en="Anniversary / Birthday">Juubel / Sünnipäev</option>
+          <option data-et="Firma üritus" data-en="Corporate event">Firma üritus</option>
+          <option data-et="Spordiüritus" data-en="Sports event">Spordiüritus</option>
+          <option data-et="Tänuüritus" data-en="Appreciation event">Tänuüritus</option>
+          <option data-et="Klubi / Baar" data-en="Club / Bar">Klubi / Baar</option>
+          <option data-et="Muu" data-en="Other">Muu</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label data-et="Kuupäev" data-en="Date">Kuupäev</label>
+          <input type="date" id="f-date">
+        </div>
+        <div class="form-group">
+          <label data-et="Ligikaudne külaliste arv" data-en="Approx. guest count">Ligikaudne külaliste arv</label>
+          <input type="text" id="f-guests" placeholder="20–50">
+        </div>
+      </div>
+      <div class="form-group">
+        <label data-et="Sõnum / Lisainfo" data-en="Message / Additional info">Sõnum / Lisainfo</label>
+        <textarea id="f-msg" placeholder=""></textarea>
+      </div>
+      <button class="btn-gold" onclick="sendInquiry()">
+        <span data-et="Saada päring" data-en="Send enquiry">Saada päring</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- FEEDBACK -->
+    <div id="feedback-form" style="margin-top: 48px; padding-top: 48px; border-top: 1px solid rgba(255,255,255,0.06);">
+      <h3 data-et="Jäta tagasiside" data-en="Leave feedback">Jäta tagasiside</h3>
+      <p class="form-sub" data-et="Kuidas läks? Sinu arvamus on mulle oluline." data-en="How did it go? Your opinion matters to me.">Kuidas läks? Sinu arvamus on mulle oluline.</p>
+      <div class="form-group">
+        <label data-et="Sinu nimi" data-en="Your name">Sinu nimi</label>
+        <input type="text" id="fb-name" placeholder="Kristjan Tamm">
+      </div>
+      <div class="form-group">
+        <label data-et="Ürituse tüüp" data-en="Event type">Ürituse tüüp</label>
+        <input type="text" id="fb-event" placeholder="">
+      </div>
+      <div class="form-group">
+        <label data-et="Tagasiside" data-en="Feedback">Tagasiside</label>
+        <textarea id="fb-msg" placeholder=""></textarea>
+      </div>
+      <button class="btn-gold" onclick="sendFeedback()">
+        <span data-et="Saada tagasiside" data-en="Send feedback">Saada tagasiside</span>
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="136746055.png" alt="DJ Kristjan Orula">
+  </div>
+  <div class="footer-copy">
+    © 2025 DJ Kristjan Orula<br>
+    <span style="font-size:10px; letter-spacing:1px;">orulakristjan@gmail.com · +372 536 62231</span>
+  </div>
+  <div class="footer-tagline" data-et="Muusika, mis jääb meelde" data-en="Music that stays with you">Muusika, mis jääb meelde</div>
+</footer>
+
+<script>
+// ---- LANG SYSTEM ----
+let currentLang = 'et';
+
+function setLang(lang) {
+  currentLang = lang;
+  document.getElementById('btn-et').classList.toggle('active', lang === 'et');
+  document.getElementById('btn-en').classList.toggle('active', lang === 'en');
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-et]').forEach(el => {
+    const txt = el.getAttribute('data-' + lang);
+    if (txt !== null) {
+      if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+        el.placeholder = txt;
+      } else if (el.tagName === 'OPTION') {
+        el.textContent = txt;
+      } else {
+        el.innerHTML = txt;
+      }
+    }
+  });
+}
+
+// ---- NAV SCROLL ----
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// ---- SCROLL REVEAL ----
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ---- SEND INQUIRY ----
+function sendInquiry() {
+  const name = document.getElementById('f-name').value;
+  const contact = document.getElementById('f-contact').value;
+  const type = document.getElementById('f-type');
+  const typeVal = type.options[type.selectedIndex]?.text || '';
+  const date = document.getElementById('f-date').value;
+  const guests = document.getElementById('f-guests').value;
+  const msg = document.getElementById('f-msg').value;
+
+  const subject = currentLang === 'et'
+    ? 'DJ päring – ' + (typeVal || 'Üritus')
+    : 'DJ Enquiry – ' + (typeVal || 'Event');
+
+  const body = currentLang === 'et'
+    ? `Tere Kristjan,\n\nNimi: ${name}\nKontakt: ${contact}\nÜrituse tüüp: ${typeVal}\nKuupäev: ${date}\nKülaliste arv: ${guests}\n\n${msg}\n\nParimate soovidega`
+    : `Hello Kristjan,\n\nName: ${name}\nContact: ${contact}\nEvent type: ${typeVal}\nDate: ${date}\nGuest count: ${guests}\n\n${msg}\n\nBest regards`;
+
+  window.location.href = `mailto:orulakristjan@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+
+// ---- SEND FEEDBACK ----
+function sendFeedback() {
+  const name = document.getElementById('fb-name').value;
+  const event = document.getElementById('fb-event').value;
+  const msg = document.getElementById('fb-msg').value;
+
+  const subject = currentLang === 'et'
+    ? 'Tagasiside – ' + (event || 'Üritus')
+    : 'Feedback – ' + (event || 'Event');
+
+  const body = currentLang === 'et'
+    ? `Tagasiside\n\nNimi: ${name}\nÜritus: ${event}\n\n${msg}`
+    : `Feedback\n\nName: ${name}\nEvent: ${event}\n\n${msg}`;
+
+  window.location.href = `mailto:orulakristjan@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+}
+</script>
+</body>
+</html>
